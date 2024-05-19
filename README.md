@@ -71,6 +71,8 @@ python3 manage.py mirgate
 ```bash
 python3 manage.py runserver
 ```
+![Снимок экрана_2024-05-20_00-13-50](https://github.com/Amartyanov1974/webservice/assets/74543172/a451bfdb-45b5-4168-80f9-e9aa1048d116)
+
 Сервис будет доступен по адресу [http://127.0.0.1:8000](http://127.0.0.1:8000)
 ### Дополнения
 Для разработки использовалась версия python3.10</br>
