@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <title>Viewer images</title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+</head>
+<body>
+  <center>
+    <img src="{{image_url}}" alt="{{message}}">
+  </center>
+</body>
+</html>

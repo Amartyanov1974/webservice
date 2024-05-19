@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  dbase:
+    image: postgres:12.0-alpine
+    volumes:
+      - type: bind
+        source: /var/www/data
+        target: /var/lib/postgresql/data
+        read_only: false
+        bind:
+          create_host_path: true
+    env_file:
+      - .env
+
+  web:
+    build: ./app
+    env_file:
+      - .env
+    volumes:
+      - type: bind
+        source: /var/www/frontend
+        target: /static
+        read_only: false
+        bind:
+          create_host_path: true
+      - ./app:/code
+
+    command: bash -c "python manage.py collectstatic  --noinput && \
+        cp -ru /code/staticfiles /static/ && \
+        python manage.py migrate --noinput && \
+        python manage.py load_csv && \
+        gunicorn -b 0.0.0.0:8000 --workers 3 webservice.wsgi:application"
+    ports:
+      - 8000:8000
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - type: bind
+        source: /var/www/frontend
+        target: /www
+        read_only: false
+        bind:
+          create_host_path: true
+    ports:
+      - 80:80
+    depends_on:
+      - web
