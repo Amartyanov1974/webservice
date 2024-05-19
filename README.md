@@ -47,6 +47,9 @@ http://127.0.0.1:8000/?category[]=show&category[]=games
 ```bash
 docker compose up -d
 ```
+![Снимок экрана_2024-05-19_22-48-44](https://github.com/Amartyanov1974/webservice/assets/74543172/11283494-b733-4353-a0dd-05a20edcedd6)
+
+
 
 
 
