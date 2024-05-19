@@ -33,7 +33,7 @@ http://127.0.0.1:8000/?category[]=show&category[]=games
 - `DEBUG` — дебаг-режим. Поставьте `False`.
 - `SECRET_KEY` — секретный ключ проекта. Он отвечает за шифрование на сайте.
 - `ALLOWED_HOSTS` — белый список имен хостов / доменов, на которых может обслуживаться ваш веб-сервер.
--  IS_POSTGRESQL - True, если будет использоваться postgresql и False если sqlite</br>
+-  `IS_POSTGRESQL` - True, если будет использоваться postgresql и False если sqlite</br>
 В случае использования postgresql потребуются дополнительные переменные окружения:
 - `DATABASE_URL`— параметры подключения к базе данных в url формате (например postgres://pguser:pgpasswd2024@dbase/pgdb).
 - `POSTGRES_DB` — имя базы данных (например pgdb).
