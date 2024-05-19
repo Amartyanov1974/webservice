@@ -49,7 +49,8 @@ http://127.0.0.1:8000/?category[]=show&category[]=games
 docker compose up -d
 ```
 Возможный результат выполнения команды:</br>
-![Снимок экрана_2024-05-19_22-48-44](https://github.com/Amartyanov1974/webservice/assets/74543172/11283494-b733-4353-a0dd-05a20edcedd6)</br>
+![Снимок экрана_2024-05-20_00-09-47](https://github.com/Amartyanov1974/webservice/assets/74543172/8e1e7406-32a9-41d4-8ce4-c898b717a7ba)
+</br>
 Сервис будет доступен по адресу, указанному в переменной ALLOWED_HOSTS.
 
 ## Запуск локально в виртуальном окружении
