@@ -4,7 +4,8 @@ from django.db import models
 class Image(models.Model):
     image_url = models.TextField(
         verbose_name='Ссылка на картинку',
-        max_length=500
+        max_length=500,
+        unique = True
     )
     amount_of_shows = models.IntegerField(
         verbose_name='Количество показов',
