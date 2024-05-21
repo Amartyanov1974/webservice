@@ -148,4 +148,4 @@ FILE_PATH = BASE_DIR / 'categories.csv'
 # Максимальное количество картинок с максимальными показами,
 # из которых случайным образом будет выбираться одна
 
-AMOUNT_SELECTED_IMG = 5
+SELECTED_NUM_IMG = 5

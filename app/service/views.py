@@ -11,12 +11,12 @@ from service.functions import count_amount_show_image
 
 def get_images_with_max_show(
         category_names: List[str],
-        amount_selected_img: int) -> List[Image]:
+        selected_num_img: int) -> List[Image]:
     """
     Возвращает список объектов Image с максимальными количеством показов
     Args:
         category_names (list): список названий категорий картинок
-        amount_selected_img (int): максимальное количество возвращаемых объектов
+        selected_num_img (int): максимальное количество возвращаемых объектов
     Return:
         список объектов Image
     """
@@ -24,10 +24,10 @@ def get_images_with_max_show(
     if category_names and category_names[0]:
         images = Image.objects.filter(categories__category_name__in=category_names). \
             prefetch_related('categories'). \
-            order_by('-amount_of_shows_category')[:amount_selected_img]
+            order_by('-amount_of_shows_category')[:selected_num_img]
     else:
         images = Image.objects.all().prefetch_related('categories'). \
-            order_by('-amount_of_shows_category')[:amount_selected_img]
+            order_by('-amount_of_shows_category')[:selected_num_img]
     return images
 
 
@@ -60,6 +60,20 @@ def diminish_amount_of_shows(pk: int) -> None:
         update(amount_of_shows=F('amount_of_shows') - 1)
 
 
+def get_number_pictures_choice() -> int:
+    """
+    Получает количество картинок для случайного выбора,
+    минимальное количество задается в файле конфигурации
+
+    """
+    tehth_of_images = Image.objects.count() // 10
+    if tehth_of_images < settings.SELECTED_NUM_IMG:
+        selected_num_img: int = settings.SELECTED_NUM_IMG
+    else:
+        selected_num_img = tehth_of_images
+    return selected_num_img
+
+
 def show_pictures(request):
     """
     Показывает картинку по запросу,
@@ -69,10 +83,13 @@ def show_pictures(request):
     удаляет из базы картинки без показов
     """
     category_names = request.GET.getlist('category[]')
-    amount_selected_img: int = settings.AMOUNT_SELECTED_IMG
+
+    selected_num_img = get_number_pictures_choice()
+
     images_max_show = get_images_with_max_show(
         category_names,
-        amount_selected_img)
+        selected_num_img)
+
     if not len(images_max_show):
         context = {'message': 'Показы этой категории закончились'}
         return render(request, 'index.html', context)
@@ -80,6 +97,7 @@ def show_pictures(request):
         picture_show = get_picture_show(images_max_show)
 
     diminish_amount_of_shows(picture_show.pk)
+
     count_amount_show_image(picture_show)
 
     context = {
