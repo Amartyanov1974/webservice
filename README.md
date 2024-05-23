@@ -78,5 +78,11 @@ python3 manage.py runserver
 Для разработки использовалась версия python3.10</br>
 Если у вас под рукой нет рабочего Posqresql сервера, в .env в параметре IS_POSTGRESQL должно быть False.
 
+## Запуск тестов
+```bash
+pytest
+```
+![Снимок экрана_2024-05-23_22-37-44](https://github.com/Amartyanov1974/webservice/assets/74543172/820b0a3b-aa8b-442d-886e-b0ec45be38cc)
+
 ## Цель работы
 Выполнение тестового задания
