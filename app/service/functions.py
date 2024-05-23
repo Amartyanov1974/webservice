@@ -50,7 +50,12 @@ def count_amount_show_image(image: Type[Image]) -> None:
     Args:
         image (Image): объект модели Image
     """
-    amount = image.amount_of_shows // image.categories.count()
+    amount_of_shows = image.amount_of_shows
+    categories_count = image.categories.count()
+
+    assert categories_count > 0
+
+    amount = amount_of_shows // categories_count
     image.amount_of_shows_category = amount
     image.save(update_fields=['amount_of_shows_category'])
 
