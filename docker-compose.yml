@@ -11,6 +11,8 @@ services:
           create_host_path: true
     env_file:
       - .env
+    networks:
+      - webservice
 
   web:
     build: ./app
@@ -30,8 +32,8 @@ services:
         python manage.py migrate --noinput && \
         python manage.py load_csv && \
         gunicorn -b 0.0.0.0:8000 --workers 3 webservice.wsgi:application"
-    ports:
-      - 8000:8000
+    networks:
+      - webservice
 
   nginx:
     build: ./nginx
@@ -46,3 +48,8 @@ services:
       - 80:80
     depends_on:
       - web
+    networks:
+      - webservice
+
+networks:
+  webservice:
