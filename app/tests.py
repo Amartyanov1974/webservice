@@ -1,7 +1,5 @@
 import pytest
 
-from django.core.exceptions import ObjectDoesNotExist
-
 from django.conf import settings
 from service.models import Image, ImagesCategory
 from service import functions
